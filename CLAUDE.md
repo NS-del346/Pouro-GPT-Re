@@ -34,12 +34,12 @@ scope: repository_root
 | 参照専用 | `NS-del346/Pouro-Figma` | 読み取り専用。Owner明示なく変更しない |
 | 保護対象 | `NS-del346/Pouro-GPT` | Owner明示承認なしに変更しない |
 
-## 2. モデル方針
+## 2. モデル方針とEffort運用
 
-- Claude Codeの既定モデル: Claude Sonnet 5 / High
-- 上位正本(`docs/context/02_OWNER_DECISIONS.md`, `docs/context/07_AI_ORCHESTRATION_TOOLING.md`)が許可していないモデルを、このCLAUDE.mdだけで恒久的に許可しない。恒久的な許可モデルの変更は、先に上記2正本を更新してから行う。Ownerが個別タスクで別モデルを明示承認した場合、そのタスクに限り現在のOwner指示を優先できる
-- Claude Fable 5は、実環境で利用可能と確認できるまで使用しない
-- 作業報告には「使用モデルとEffort」を明記する(例: Claude Sonnet 5 / High)
+- 既定: Claude Sonnet 5 / High(repository調査・実装・テスト・技術監査)。Claude Fable 5はOwner確認済みで利用可能。UI/UX設計・情報階層・interaction・motion・copy・visual hierarchyは Fable 5 / High、重要画面の最終判断・複数案統合・リリース前視覚品質監査は Fable 5 / 実環境で利用可能な最高Effortを推奨する
+- 許可モデルの恒久拡張は先に `docs/context/02_OWNER_DECISIONS.md` / `docs/context/07_AI_ORCHESTRATION_TOOLING.md` を更新してから行う。Ownerが個別タスクで別モデルを明示承認した場合、そのタスクに限り現在のOwner指示を優先できる
+- Active Brew状態機械、Recipe Truth統合、data migration、Import/Export、No Hostage Data、accessibility release gate、UIと状態遷移の両方を変更する作業は、Sonnet 5で仕様・コード・テストを実装または監査し、UI/UX要素がある場合は別セッションのFable 5で独立レビューする。同一セッションの自己レビューだけで完了扱いにしない
+- 各タスク開始前と主要工程報告時に、現在使用中・推奨・最高成果時のモデルとEffort、選定理由、開始前の切替要否を明記する。モデル切替は提案までとし、Owner未承認で自動切替しない。利用不能または未確認のモデル・Effortを使用済みとして報告しない
 
 ## 3. 作業開始前 Preflight(必須)
 
@@ -152,7 +152,7 @@ scope: repository_root
 - 完了したこと
 - ブロッカー
 - 次の3アクション
-- 使用モデルとEffort(例: Claude Sonnet 5 / High)
+- 使用モデルとEffort(現在使用中・推奨・最高成果時のモデルとEffort、選定理由、開始前の切替要否。最高成果時の指定は実環境で利用可能な範囲に限る)
 - branch
 - HEAD
 - worktree status(git status --short 相当)
