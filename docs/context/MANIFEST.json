@@ -1,0 +1,207 @@
+{
+  "package": "pouro-gpt-re-context-pack-final-gpt55-high-v1.1.1",
+  "version": "1.1.1",
+  "generated_at": "2026-07-01",
+  "admin_model_policy": "GPT-5.5 高",
+  "patch_scope": "targeted_v1_1_1_patch",
+  "file_count_excluding_manifest_and_sums": 38,
+  "hash_algorithm": "SHA-256",
+  "notes": [
+    "Current repository, Figma, and physical-device status are not independently verified.",
+    "R-11 and R-12 display ratios are rounded labels; built-in reference water and listed steps remain exact.",
+    "Manifest excludes itself and SHA256SUMS.txt to avoid recursive hashes.",
+    "Hashes apply only to exact bytes in this generated package."
+  ],
+  "files": [
+    {
+      "path": "docs/context/00_CONTEXT_INDEX.md",
+      "bytes": 4009,
+      "sha256": "77b420b5dae4fcde5ebe4b6da4d8d53751105f5eada952948f4edf6d03af2125"
+    },
+    {
+      "path": "docs/context/01_PROJECT_BRIEF.md",
+      "bytes": 1827,
+      "sha256": "ab630ebcaa5e272a57b36518edf776f0f4e6b78c7a48f3e93af5b6222ba99364"
+    },
+    {
+      "path": "docs/context/02_OWNER_DECISIONS.md",
+      "bytes": 3662,
+      "sha256": "ec3cf5425b752b70450420f2892ca56ec713632eb9f423835d5c90d7a49dca0a"
+    },
+    {
+      "path": "docs/context/03_RECIPE_TRUTH_V1.md",
+      "bytes": 15879,
+      "sha256": "b1441d8e153c3b96367179797bc208d22b3affda5e6f682768f9d36bfbe4f6cb"
+    },
+    {
+      "path": "docs/context/04_LAB_COMPARE_MODE_V1.md",
+      "bytes": 2486,
+      "sha256": "d64ed2e264ead7bd4a1944bee512d315349cff7150e6ff0e2e27fdcff3bd7d5f"
+    },
+    {
+      "path": "docs/context/05_THEME_DARK_LAB_TOKENS.md",
+      "bytes": 3503,
+      "sha256": "97044fc75c8523f67062bcbfcda2ef1033204d4a1320526083f85410e4f4666f"
+    },
+    {
+      "path": "docs/context/06_DESIGN_APPROVAL_PROTOCOL.md",
+      "bytes": 1792,
+      "sha256": "9e052676813b6a17955a300a0fea9290df652e847bb3d1ab8b433428f562f4f1"
+    },
+    {
+      "path": "docs/context/07_AI_ORCHESTRATION_TOOLING.md",
+      "bytes": 2244,
+      "sha256": "137d68fc5b415818ba0f42a623f79142d84cd188a99cbf59556d9f669a09e4ab"
+    },
+    {
+      "path": "docs/context/08_HUMAN_OPERATION_PROTOCOL.md",
+      "bytes": 1389,
+      "sha256": "c4bf13f40035c928e6c7de45692dafd385cb290a4197516fb494418d217a4c75"
+    },
+    {
+      "path": "docs/context/09_MONETIZATION_AD_POLICY.md",
+      "bytes": 1656,
+      "sha256": "cfa55c0c0fed199b4922a9443a237c0966e2deed9f794da4cc33a9034f78c1da"
+    },
+    {
+      "path": "docs/context/10_DATA_STORAGE_PRIVACY.md",
+      "bytes": 829,
+      "sha256": "add6aa42589574ff7a803918a597297b09632f33da7fd9b6f13d201cf27aa79b"
+    },
+    {
+      "path": "docs/context/11_ACCEPTANCE_QA.md",
+      "bytes": 2781,
+      "sha256": "fddf3d41c240f2fbb51882914b262218dd9a66796bfe3125b562bc93d882cda5"
+    },
+    {
+      "path": "docs/context/12_ASSET_ICON_POLICY.md",
+      "bytes": 1667,
+      "sha256": "06dfcf1b646d15dd72a5e6412169e536ae018048a72790dd140d610e22ec33e8"
+    },
+    {
+      "path": "docs/context/13_IMPLEMENTATION_PLAN.md",
+      "bytes": 2797,
+      "sha256": "97dad7b46d49a2db52224926bd9643754cd82ec33ab191febc7e22e6dc0d6b50"
+    },
+    {
+      "path": "docs/context/14_COMPETITIVE_STRATEGY.md",
+      "bytes": 4445,
+      "sha256": "3a98b5d75b0ed027cb1016358ea050ceb85791397ccd4fdc645cc6f418046a73"
+    },
+    {
+      "path": "docs/context/15_NATIVE_ROADMAP.md",
+      "bytes": 2090,
+      "sha256": "b1d5ab76cab0e638729a5caff5051c0af42701619b304dcd8e48977f16efa901"
+    },
+    {
+      "path": "docs/context/16_NO_HOSTAGE_DATA_POLICY.md",
+      "bytes": 1417,
+      "sha256": "89f7b0866e170b5463ba72582d5e3702509090a7b14e2caddcddc13bf7e85104"
+    },
+    {
+      "path": "docs/context/17_BREW_RUNNER_RELIABILITY.md",
+      "bytes": 3018,
+      "sha256": "537974eb5b71fc3226489af9c7d52eba9d9f2ff9e615dfe4bc763fea9d156183"
+    },
+    {
+      "path": "docs/context/18_UI_UX_CORRECTION_DIRECTIVE.md",
+      "bytes": 12201,
+      "sha256": "f5bd7bb1c26e6f8bb4a6184a8b3ca9fa5062a0eb352da28eae3044c47b417251"
+    },
+    {
+      "path": "docs/context/99_CONTEXT_IMPORT_OPERATION_MEMO_JA.md",
+      "bytes": 4262,
+      "sha256": "b90831a606411c1a70c035a4d970dfab24dc19330d83eea57ad6aae8db420149"
+    },
+    {
+      "path": "docs/context/PATCH_REPORT_JA.md",
+      "bytes": 3195,
+      "sha256": "cbfce646fe816a0408e64bf1775a24a39bfc00683b0f74e8ba678cf7b69ddc3d"
+    },
+    {
+      "path": "docs/context/README.md",
+      "bytes": 1739,
+      "sha256": "08e92c9938f1906f8214b004f8e18b4e1561f8e4f9ef20b8c4e234a162b060a8"
+    },
+    {
+      "path": "docs/context/SOURCE_PROVENANCE.md",
+      "bytes": 2971,
+      "sha256": "96c118ca175354ba4393d1a02344b116ec3b52ecce5eff6e9f06092382ec1fe1"
+    },
+    {
+      "path": "docs/design/active-brew-state-model.md",
+      "bytes": 1471,
+      "sha256": "3b174987211be5d59dcdc5cb673ecf0f7d4a6cdde04ef0727ec523953e873c2b"
+    },
+    {
+      "path": "docs/design/copywriting-guidelines.md",
+      "bytes": 1255,
+      "sha256": "6adb280597b215ee04e94c4aff00d7a33e86917a7272505060293f501a0350ff"
+    },
+    {
+      "path": "docs/design/figma-workflow.md",
+      "bytes": 995,
+      "sha256": "3a0487768aa9b11e0fdbcc5f6ff3295e618176105b60b67bb012c364a4d486e1"
+    },
+    {
+      "path": "docs/design/home-redesign.md",
+      "bytes": 1252,
+      "sha256": "a8a51064245ee164ba511aadaecbd85af4285f1a906d2f0d648d2d9142a28c61"
+    },
+    {
+      "path": "docs/design/iconoir-system.md",
+      "bytes": 834,
+      "sha256": "da8ff8bb6ed2a5461f216a45840f267b5bab23d3242f538e6ab5eb587b3840a5"
+    },
+    {
+      "path": "docs/design/motion-system.md",
+      "bytes": 1458,
+      "sha256": "9bb1b925e03d9d96f262b30140fcbb221bd24355a0c6a09873cd296506bf28d9"
+    },
+    {
+      "path": "docs/design/setup-preview-guidelines.md",
+      "bytes": 1275,
+      "sha256": "d54a43ec4c08b7643937d8e89f4dacd88a8140818a0e10f187c46138433771c1"
+    },
+    {
+      "path": "docs/implementation/ui-ux-correction-roadmap.md",
+      "bytes": 1994,
+      "sha256": "3dae5eff740867dd0bea923464d5ce534b2589cf2d7585a7802c91c1a742672f"
+    },
+    {
+      "path": "docs/prompts/CHATGPT_ADMIN_GPT55_HIGH.md",
+      "bytes": 1724,
+      "sha256": "0973d381ec8fff545a52ae5c38fdbf4d00800db6a74af4079154dc066b5e6add"
+    },
+    {
+      "path": "docs/prompts/CLAUDE_CODE_SONNET5_FABLE5.md",
+      "bytes": 1754,
+      "sha256": "1c806de05b9fae61fff9d03beb3bacb7303ab4397001b1277e8b19ec436d2abc"
+    },
+    {
+      "path": "docs/prompts/CLAUDE_DESIGN_FABLE5_SONNET5.md",
+      "bytes": 1874,
+      "sha256": "8ace8a540adaec5d75b1434b99279d2a59d9acb47a8ec53d0ba7d1ed34acfd8f"
+    },
+    {
+      "path": "docs/prompts/CODEX_IMPLEMENTATION.md",
+      "bytes": 1466,
+      "sha256": "f62ffce3f40fe1499f22909ff7b38c6ffbfd2c49b08b90947c0e88ea90e0958a"
+    },
+    {
+      "path": "docs/prompts/PONYTAIL_REVIEW.md",
+      "bytes": 1307,
+      "sha256": "ffb037957a0a5624a942b3c508a4a11af53e02307ab1ea44e08048cce34648b2"
+    },
+    {
+      "path": "docs/prompts/QA_RED_TEAM.md",
+      "bytes": 1416,
+      "sha256": "2e5afd45171f274359248a71fc09fce61013977bd3e1102f6778d74675651d2f"
+    },
+    {
+      "path": "docs/qa/ui-ux-release-gate.md",
+      "bytes": 1718,
+      "sha256": "3148171940fd8b26e2019bc6b2c7530cc7354d2793115eddb9ecde2696cdd300"
+    }
+  ]
+}
