@@ -1,1 +1,13 @@
 .claude/hookify.*.local.md
+
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+
+*.local
+*.log
+.env
+.env.*
+!.env.example
