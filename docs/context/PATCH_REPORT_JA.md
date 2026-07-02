@@ -73,3 +73,36 @@ critical_release_blocker:
 - 外部価格、レビュー、SDK、2026年時点のiOS／PWA制約
 
 未実行項目は`PASS`ではなく、`UNVERIFIED`、`RESEARCH_REQUIRED`、または`NOT_RUN`として扱う。
+
+## 6. Fast Track Operating Mode Governance Patch
+
+- governance_patch_id: `POURO-GPT-RE-FAST-TRACK-GITHUB-GOVERNANCE-TO-DRAFT-PR-HG-002`
+- applied_at: `2026-07-02`
+- risk: `LOW`
+- type: `DOCS_ONLY_GOVERNANCE_PERSISTENCE`
+- product_behavior_change: `false`
+- recipe_truth_change: `false`
+- data_migration: `false`
+- deployment: `false`
+
+変更対象:
+
+- `CLAUDE.md`
+- `AGENTS.md`
+- `docs/context/02_OWNER_DECISIONS.md`
+- `docs/context/07_AI_ORCHESTRATION_TOOLING.md`
+- `docs/prompts/CODEX_IMPLEMENTATION.md`
+- `docs/context/08_HUMAN_OPERATION_PROTOCOL.md`
+- `docs/context/PATCH_REPORT_JA.md`
+
+永続化した方針:
+
+- 低リスクPRは1回の限定Owner承認でcapability preflightからDraft PR・独立監査まで進行できる
+- `main`はread-onlyで、clean worktreeとexpected branch／HEADのpreflightを維持する
+- capability不足runtimeでは実装を開始しない
+- transient failureは同一scope・同一方式で最大2回再試行できる
+- 別transport、別package manager、別APIへのsilent fallbackを禁止する
+- Ready、merge、deploy、branch deletion、force push、destructive operation等は個別Owner承認を維持する
+- Ownerの通常操作を原則としてDraft PR監査後のmerge判断へ集約する
+
+このpatchはProduct UI、Recipe Truth、PWA、assets、GitHub Actions、deployment、repository settingsを変更しない。private Drive ID／URLをpublic GitHubへ追加しない。
