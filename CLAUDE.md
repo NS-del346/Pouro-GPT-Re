@@ -45,7 +45,8 @@ scope: repository_root
 
 - read-only確認(状態把握・正本読了・git status確認など)は `main` 上でも実施可能
 - ファイル変更、実装、commitを伴う作業は `main` 以外の feature branch で行う
-- feature branchの作成はOwner承認後に行う
+- feature branch作成を含むmutationは、現在のOwner承認scopeに限定して行う
+- bounded Fast Track low-risk PR承認では、capability preflightからDraft PR作成・独立read-only監査まで連続実行できる
 
 実装作業を始める前に必ず確認し、報告すること。
 
@@ -57,22 +58,42 @@ scope: repository_root
 - [ ] 対象作業に関連する正本(`docs/context/*.md` の該当ファイル)を読了したか
 - [ ] npm scripts(`npm run ci` 等)が実在するか。存在しない/実行不可なら `NOT_RUN` として理由を記録し、代替の推測をしない
 
-## 4. Owner承認が必須な操作
+## 4. Fast Trackと個別Owner承認
 
-以下は提案・準備までとし、実行前にOwnerの明示承認を待つ。
+### 4.1 Fast Track low-risk PR
 
-- feature branchの作成
-- main/masterへの直接push
+通常の低リスクPRでは、1回の限定Owner承認に次を含められる。
+
+- executor capability preflight
+- feature branch作成または承認済みbranch checkout
+- repository clone／environment setup／package install
+- 承認scope内のファイル作成・編集
+- format／lint／typecheck／test／build／E2E
+- stage／commit／push
+- Draft PR作成・本文更新
+- remote diff監査と独立read-only監査
+
+Fast TrackはDraft PRと独立監査で停止する。`main`はread-onlyとし、clean worktree、expected branch／HEAD、限定scopeをmutation前に確認する。capability不足runtimeでは実装を開始しない。
+
+### 4.2 個別Owner承認を維持する操作
+
+- Ready for Reviewへの変更
 - PR mergeまたはclose
+- production deploy／release
+- branch deletion
 - force push
-- production deploy
-- Figma final re-LOCKまたはlibrary publish
-- Owner Decisions変更
-- Recipe Truth変更
-- Data schemaの破壊的migration
-- ユーザーデータ削除
+- destructive migration
+- user data deletion
+- secret／credential追加
+- repository visibility変更
+- ruleset／security settings変更
+- protected repository `NS-del346/Pouro-GPT`の変更
+- Recipe Truthの意味変更
+- Owner Decisionsの重要変更
+- Figma final re-LOCK／library publish
 - App Icon redesign再開
-- `Pouro-GPT`(保護対象)への変更
+
+既にOwnerが確定したDecisionを意味変更なしでcanonical文書へ記録するだけの変更は、scopeが限定されている場合にFast Trackへ含められる。
 
 ## 5. Active Brew — Release Blocker(絶対厳守)
 
@@ -126,14 +147,15 @@ scope: repository_root
 
 ## 9. Git運用
 
-- `main` 上で直接実装・commitを開始しない。実装前に新規 feature branch をOwnerに提案し、承認後に作成する
-- branch作成・commit・push・PR作成は、その都度、依頼範囲を確認してから行う
-- mergeはOwnerの明示承認を待つ(このCLAUDE.mdや過去の承認では代替しない)
-- 承認を求める際は、branch名・HEAD SHA・変更対象・テスト結果(PASS/FAIL/NOT_RUN)を明示する
+- `main` 上で直接実装・commitしない。書込みは承認されたfeature branchだけで行う
+- bounded Fast Track承認では、branch作成、edit、validation、stage、commit、push、Draft PR、独立監査を1つの承認scopeとして連続実行できる
+- Fast TrackはReady for Review前で停止する。merge、deploy、branch deletion等へ自動進行しない
 - 一つのPR / 一つの変更単位で一つの明確な責務のみを扱う
-- 変更前に影響範囲とテスト計画を提示する
-- ファイル変更後は関連テストを実行し、結果を報告する(実行不能ならNOT_RUNと理由)
-- エラー発生時、無関係な箇所の修正を拡大しない。原因箇所に閉じて対応する
+- 変更前にrepository、branch、base SHA、対象ファイル、validation、rollbackを確認する
+- 変更後は関連検証を実行し、未実行は`NOT_RUN`として理由を記録する
+- DNS timeout、HTTP 429／5xx、registry timeout、browser download timeoutのみ、同一scope・同一方式で最大2回再試行できる
+- 別transport、別package manager、別API、別repository、別branchへのsilent fallbackを行わない
+- permission denial、authority conflict、dirty worktree、unexpected branch／HEAD、secret要求、scope外変更、destructive operationでは即時停止する
 - 既存の未コミット差分を勝手に削除・上書き・stashしない
 
 ## 10. 人間向け操作(ユーザーはCLI専門家ではない)
@@ -142,6 +164,7 @@ scope: repository_root
 - CLIが必要な場合は、Windows向けに一度に1コマンドずつ提示する
 - 実行場所、正常時の結果、異常時に停止すべき条件を説明してから実行する
 - 複雑な複数行スクリプトをいきなり提示しない
+- 通常の低リスクPRではOwner操作を原則としてDraft PR監査後のmerge判断へ集約する
 
 ## 11. 作業報告フォーマット
 
