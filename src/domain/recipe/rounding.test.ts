@@ -1,12 +1,13 @@
 import { describe, expect, it } from 'vitest';
 
-import { round0_1g } from './rounding';
+import { MAX_SAFE_GRAMS_FOR_TENTHS, round0_1g } from './rounding';
 
 describe('round0_1g', () => {
   it('rounds non-negative finite gram values to the 0.1g grid', () => {
     expect(round0_1g(0)).toBe(0);
     expect(round0_1g(1.04)).toBe(1);
     expect(round0_1g(1.05)).toBe(1.1);
+    expect(round0_1g(0.05)).toBe(0.1);
     expect(round0_1g(249.55)).toBe(249.6);
     expect(round0_1g(0.1 + 0.2)).toBe(0.3);
   });
@@ -30,6 +31,18 @@ describe('round0_1g', () => {
 
   it('rejects negative inputs with RangeError', () => {
     expect(() => round0_1g(-0.1)).toThrow(RangeError);
+  });
+
+  it('rejects finite values whose rounded tenths are outside the safe integer range', () => {
+    expect(() => round0_1g(Number.MAX_VALUE)).toThrow(RangeError);
+    expect(() => round0_1g(MAX_SAFE_GRAMS_FOR_TENTHS + 1)).toThrow(/integer tenths/);
+  });
+
+  it('keeps safe-boundary values finite and on the safe integer tenths grid', () => {
+    const rounded = round0_1g(MAX_SAFE_GRAMS_FOR_TENTHS - 1);
+
+    expect(Number.isFinite(rounded)).toBe(true);
+    expect(Number.isSafeInteger(rounded * 10)).toBe(true);
   });
 
   it('does not return negative zero', () => {

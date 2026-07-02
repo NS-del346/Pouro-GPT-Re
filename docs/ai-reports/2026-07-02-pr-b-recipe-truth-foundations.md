@@ -30,6 +30,8 @@ PR-B adds Recipe Truth foundation types and rounding guards only. It does not ad
 
 `round0_1g()` accepts only non-negative finite numbers, rounds to the 0.1g grid with non-negative half-up semantics, rejects non-finite values with `TypeError`, rejects negative values with `RangeError`, and avoids returning negative zero.
 
+HG-015 clarifies that accepted inputs must also produce rounded integer tenths within `Number.MAX_SAFE_INTEGER`. Finite values outside that safe tenths range, including `Number.MAX_VALUE`, are rejected with `RangeError`.
+
 Final-pour rounding-delta absorption remains out of scope.
 
 ## R-13 Regression Guard
@@ -50,5 +52,29 @@ The obsolete sequence appears only as an explicit negative regression fixture in
 - `pnpm run ci`: PASS
 - `pnpm validate`: PASS
 - `git diff --check`: PASS
+
+## HG-015 Safe Range Remediation
+
+- Changed files are limited to `src/domain/recipe/rounding.ts`, `src/domain/recipe/rounding.test.ts`, and `docs/ai-reports/2026-07-02-pr-b-recipe-truth-foundations.md`.
+- Safe integer tenths contract: non-negative finite inputs are accepted only when the scaled and half-up rounded integer tenths remain within `Number.MAX_SAFE_INTEGER`.
+- Unsafe finite range behavior: `RangeError`.
+- `Number.MAX_VALUE` regression test: added.
+- Safe-boundary regression test: added.
+- Final-pour rounding-delta absorption remains unimplemented and out of scope.
+- GitHub Actions checks: none reported for Draft PR #4 at remediation time.
+
+HG-015 validation:
+
+- `pnpm format:check`: PASS
+- `pnpm lint`: PASS
+- `pnpm typecheck`: PASS
+- `pnpm test`: PASS
+- `pnpm build`: PASS
+- `pnpm test:e2e`: PASS
+- `pnpm run ci`: PASS
+- `pnpm validate`: PASS
+- Focused `round0_1g` tests: PASS
+- `Number.MAX_VALUE` regression: PASS
+- Safe-boundary regression: PASS
 
 Physical iPhone, VoiceOver, Dynamic Type, Reduced Motion, and subjective UI QA are `NOT_RUN` because they are outside PR-B scope.
