@@ -81,3 +81,46 @@ Each AI must state the model used and create a concise Capability Inventory befo
 - GUI-first instructions.
 - When CLI is unavoidable: one command at a time, exact paste location, expected result, then wait for confirmation.
 - Avoid destructive or multi-command terminal dumps.
+
+## 8. Fast Track Operating Mode
+
+`POURO-GPT-RE-FAST-TRACK-OPERATING-MODE-OWNER-DIRECTIVE-001`を現在の開発運用として採用する。
+
+通常の低リスクPRでは、1回の限定Owner承認に次を含められる。
+
+- executor capability preflight
+- feature branch作成またはcheckout
+- repository setup、environment setup、package install
+- 承認scope内の実装
+- formatter、lint、typecheck、unit／component test、build、E2E
+- stage、commit、push
+- Draft PR作成・本文更新
+- remote diff監査と独立read-only監査
+
+Fast TrackはDraft PRと独立監査で停止する。`main`はread-onlyとし、clean worktree、expected branch／HEAD、限定された変更scopeをmutation前に確認する。
+
+次は引き続き個別Owner承認を必須とする。
+
+- Ready for Review
+- PR mergeまたはclose
+- production deploy／release
+- branch deletion
+- force push
+- destructive migration
+- user data deletion
+- secret／credential追加
+- repository visibility変更
+- ruleset／security settings変更
+- protected repository変更
+- Recipe Truthの意味変更
+- Owner Decisionsの重要変更
+- Figma final re-LOCK／library publish
+- App Icon redesign再開
+
+既にOwnerが確定したDecisionを意味変更なしでcanonical文書へ記録する変更は、明示された限定scope内でFast Trackに含められる。
+
+実装開始前にexecutor capabilityを確認する。GitHub read/write、branch／commit／push、Draft PR、filesystem write、exact diff、およびtaskに必要なpackage registry／Node／package manager／browser download capabilityを満たさないruntimeでは実装を開始しない。
+
+DNS timeout、HTTP 429／5xx、package registry timeout、browser binary download timeoutは、同一scope・同一方式で最大2回再試行できる。別transport、別package manager、別API、別repository、別branchへのsilent fallbackは禁止する。
+
+Ownerの通常操作は原則としてDraft PR監査後のmerge判断へ集約する。
