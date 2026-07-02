@@ -77,4 +77,34 @@ HG-015 validation:
 - `Number.MAX_VALUE` regression: PASS
 - Safe-boundary regression: PASS
 
+## HG-016 Exact Boundary Correction
+
+- HG-015 exact-boundary follow-up: `MAX_SAFE_GRAMS_FOR_TENTHS` itself is accepted.
+- Reason: avoid `scaledTenths + 0.5` large-number rounding overflow at the exported maximum boundary.
+- Above-boundary values and `Number.MAX_VALUE` remain rejected with `RangeError`.
+- Changed files are limited to `src/domain/recipe/rounding.ts`, `src/domain/recipe/rounding.test.ts`, and `docs/ai-reports/2026-07-02-pr-b-recipe-truth-foundations.md`.
+- GitHub checks: `NOT_RUN / absent` when checked for Draft PR #4.
+- Physical iPhone, VoiceOver, Dynamic Type, Reduced Motion, and subjective UI QA remain `NOT_RUN`.
+
+HG-016 validation:
+
+- `pnpm format:check`: PASS
+- `pnpm lint`: PASS
+- `pnpm typecheck`: PASS
+- `pnpm test`: PASS
+- `pnpm build`: PASS
+- `pnpm test:e2e`: PASS
+- `pnpm run ci`: PASS
+- `pnpm validate`: PASS
+- `git diff --check`: PASS
+- Focused `round0_1g` tests: PASS
+- Exact maximum boundary test: PASS
+- Above-boundary rejection test: PASS
+- `Number.MAX_VALUE` rejection test: PASS
+- Half-up regressions: PASS
+- Obsolete R-13 regression: PASS
+- Production obsolete-sequence scan: PASS
+- Changed-file scope audit: PASS
+- Secret, credential, and private identifier scan: PASS
+
 Physical iPhone, VoiceOver, Dynamic Type, Reduced Motion, and subjective UI QA are `NOT_RUN` because they are outside PR-B scope.

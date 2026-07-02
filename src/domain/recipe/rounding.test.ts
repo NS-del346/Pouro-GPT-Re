@@ -38,11 +38,19 @@ describe('round0_1g', () => {
     expect(() => round0_1g(MAX_SAFE_GRAMS_FOR_TENTHS + 1)).toThrow(/integer tenths/);
   });
 
-  it('keeps safe-boundary values finite and on the safe integer tenths grid', () => {
-    const rounded = round0_1g(MAX_SAFE_GRAMS_FOR_TENTHS - 1);
+  it('accepts the exact exported safe boundary', () => {
+    const exactBoundary = round0_1g(MAX_SAFE_GRAMS_FOR_TENTHS);
 
-    expect(Number.isFinite(rounded)).toBe(true);
-    expect(Number.isSafeInteger(rounded * 10)).toBe(true);
+    expect(Number.isFinite(exactBoundary)).toBe(true);
+    expect(Number.isSafeInteger(exactBoundary * 10)).toBe(true);
+    expect(exactBoundary).toBe(MAX_SAFE_GRAMS_FOR_TENTHS);
+  });
+
+  it('keeps near-boundary values finite and on the safe integer tenths grid', () => {
+    const nearBoundary = round0_1g(MAX_SAFE_GRAMS_FOR_TENTHS - 1);
+
+    expect(Number.isFinite(nearBoundary)).toBe(true);
+    expect(Number.isSafeInteger(nearBoundary * 10)).toBe(true);
   });
 
   it('does not return negative zero', () => {

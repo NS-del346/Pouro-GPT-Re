@@ -19,7 +19,7 @@ export function round0_1g(grams: number): number {
     throw new RangeError('round0_1g cannot safely scale this value to integer tenths.');
   }
 
-  const tenths = Math.floor(scaledTenths + 0.5 + Number.EPSILON);
+  const tenths = Math.round(scaledTenths);
 
   if (!Number.isSafeInteger(tenths)) {
     throw new RangeError('round0_1g cannot safely round this value to integer tenths.');
