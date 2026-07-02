@@ -1,6 +1,6 @@
 # PR-A Bootstrap Report
 
-Status: implemented for Draft PR review, with HG-011 remediation applied.
+Status: implemented for Draft PR review, with HG-011 remediation applied and HG-012 documentation correction applied.
 
 ## Scope
 
@@ -34,9 +34,16 @@ Status: implemented for Draft PR review, with HG-011 remediation applied.
 | `pnpm validate`                                             | PASS    | package validate ran `pnpm run ci && pnpm test:e2e`               |
 | `pnpm run test:e2e:offline`                                 | NOT_RUN | Script is not defined in PR-A bootstrap package.json              |
 
+## Command Semantics
+
+- `pnpm ci`: pnpm built-in frozen install command. It is not the `package.json` `ci` script, and standalone `pnpm ci` was not run during HG-011 remediation.
+- `pnpm run ci`: package `ci` script that runs format check, lint, typecheck, unit test, and production build.
+- `pnpm validate`: package `validate` script that runs `pnpm run ci` followed by production-preview E2E.
+
 ## Audit Notes
 
 - Changed files are limited to the HG-011 allowlist.
+- HG-012 documentation correction is limited to `README.md` and `docs/ai-reports/2026-07-02-pr-a-bootstrap.md`.
 - Dependencies are limited to the HG-011 remediation scope and pinned exactly in `package.json`.
 - `validate` now calls the package `ci` script via `pnpm run ci` before E2E.
 - ESLint is pinned to `9.39.4` to satisfy `eslint-plugin-jsx-a11y@6.10.2` peer compatibility.

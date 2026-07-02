@@ -22,6 +22,6 @@ pnpm typecheck
 pnpm test
 pnpm build
 pnpm test:e2e
-pnpm ci
+pnpm run ci
 pnpm validate
 ```
