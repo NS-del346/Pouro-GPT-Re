@@ -86,10 +86,12 @@ Before relying on PWA for brew-critical behavior, research:
 
 Recommended future order:
 
-1. Keep screen awake / background recovery
+1. Keep screen awake / same-process background continuity
 2. Live Activities / Dynamic Island
 3. native haptics and notifications
 4. StoreKit / Remove Ads
 5. Apple Watch
 6. Bluetooth scale integrations
 7. advanced telemetry
+
+OD-05 and OD-05-RECOVERY also apply to future native implementation: same-process continuity may preserve in-memory session timing, but reload/crash/process termination must not restore an incomplete brew, and persistent incomplete-brew snapshots remain prohibited. Completed History persistence remains a separate allowed contract.

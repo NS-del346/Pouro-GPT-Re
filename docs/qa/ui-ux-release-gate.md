@@ -5,9 +5,12 @@
 ```yaml
 release_truth_matrix:
   maturity: OWNER_BOUND_BASELINE
-  repository_canonical_effect: PENDING_MAIN_MERGE
+  repository_canonical_effect: EFFECTIVE_ON_MAIN
   baseline_date: 2026-07-03
-  base_SHA: bf105230c94386189ae179d24cce2421484cd2af
+  canonical_main_SHA: c7d53038a29d2cc1d2f0b8d084dacf7e5df196db
+  merged_via_PR: 8
+  merged_at: 2026-07-03T21:14:48Z
+  source_base_SHA: bf105230c94386189ae179d24cce2421484cd2af
 allowed_status:
   - OWNER_BOUND_NOT_IMPLEMENTED
   - IMPLEMENTED_VERIFIED
