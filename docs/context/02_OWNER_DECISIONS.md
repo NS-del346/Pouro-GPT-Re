@@ -90,6 +90,131 @@ Each AI must state the model used and create a concise Capability Inventory befo
 - Motion must be quiet, restrained, reduced-motion compatible, and non-game-like.
 - Brew Advice requires research and sufficient data; no data means no advice.
 
+### 5.1 Gate 1 Active Brew Owner Decisions
+
+Status: `OWNER_APPROVED` unless individually noted. These decisions record the
+Owner-approved Gate 1 baseline and do not authorize runtime source changes,
+Recipe Truth changes, new microvariants, winner selection, or HG-036A work.
+
+```yaml
+OD-01:
+  status: OWNER_APPROVED
+  scope: AB02
+  decision: water_amount
+  meaning: POURING画面のprimary valueは注湯量とする。
+
+OD-02:
+  status: OWNER_APPROVED
+  scope: AB04
+  decision: context_expandable
+  meaning: route railは必要な文脈に応じて展開可能とする。
+
+OD-03:
+  status: OWNER_APPROVED
+  scope: POURO_FABLE5_REFERENCE_DIRECTION
+  decision: limited_decorative_tags
+  meaning: secondary Englishは限定的な装飾タグにだけ使用する。
+
+OD-04:
+  status: OWNER_APPROVED
+  scope: Shared
+  decision: waiting_skip_with_confirmation
+  meaning:
+    - WAITING skipには明示確認が必要
+    - skipはeventとして記録する
+    - WAITING skipは一般的なmanual step navigationを許可しない
+    - WAIT_SKIPPED vocabularyだけでUIまたはtransitionを自動許可しない
+
+OD-05:
+  status: OWNER_APPROVED
+  scope: Shared
+  decision: no_partial_record
+  meaning:
+    - incomplete brewをHistoryへ保存しない
+    - resumable sessionを提供しない
+    - later resume用partial recordを作らない
+    - incomplete brewをcompleted History recordへ変換しない
+
+OD-05-RECOVERY:
+  status: OWNER_APPROVED
+  selection: A
+  decision: no_crash_or_reload_restoration
+  meaning:
+    - incomplete brewの永続auto-snapshotを作成しない
+    - reload後に途中抽出を復元しない
+    - crash後に途中抽出を復元しない
+    - browser／app process終了後に途中抽出を復元しない
+    - prior incomplete session用recovery choice UIを提供しない
+    - incomplete brewをsilent completeしない
+    - incomplete brewをHistoryへ保存しない
+  pause_resume:
+    same_live_session:
+      preserve_same_underlying_state: true
+      preserve_same_step: true
+    persisted_across_reload_or_crash: false
+  backgrounding:
+    same_process_session_survives:
+      preserve_current_in_memory_session: true
+      allow_elapsed_recalculation_from_in_memory_timestamps: true
+    page_reloaded_or_process_terminated:
+      restore_incomplete_brew: false
+  completed_history:
+    stable_saved_snapshot: allowed
+    Brew_Again_from_completed_record: allowed
+    incomplete_brew_recovery: prohibited
+
+OD-06:
+  status: OWNER_APPROVED
+  scope: Shared
+  decision: journal_prompt_after_summary
+  meaning:
+    - Drawdown完了後にsummaryを表示する
+    - summary表示後にJournal入力を促す
+    - Journal入力前にsummaryを省略しない
+
+OD-07:
+  status: OWNER_APPROVED_REFRAMED
+  title: progression_mode_policy
+  normal_mode:
+    default_progression: automatic
+    persistent_manual_step_controls: prohibited
+    settings_configuration: allowed
+    exact_settings_option_and_copy: UNRESOLVED
+  LAB_mode:
+    manual_step_controls: allowed
+  state_guards:
+    POURING:
+      completion: explicit_user_confirmation_required
+      time_only_completion: prohibited
+    WAITING:
+      countdown_completion: automatic_transition_allowed
+      skip: explicit_confirmation_required
+    DRAWDOWN:
+      completion: explicit_user_confirmation_required
+      time_only_completion: prohibited
+  still_unresolved:
+    - Settingsで変更可能にする具体的な項目
+    - Settings上の日本語copy
+    - preferenceの保存形式
+    - preferenceの初期化方法
+  do_not_infer:
+    - 通常モードでmanual next／backを常設する
+    - POURINGを時間だけで完了する
+    - DRAWDOWNを時間だけで完了する
+    - Settingsの具体的選択肢
+    - persisted preference schema
+```
+
+Preserved principles:
+
+- POURINGは時間だけで完了しない。
+- 注ぎ終えた操作が必要。
+- PauseはWAITINGではない。
+- Pause resumeはsame live session内で同じunderlying stateへ戻る。
+- Drawdownは独立状態。
+- Drawdownはユーザー確認なしに完了しない。
+- Recipe Truthを変更しない。
+
 ## 6. Monetization Decisions
 
 - No forced video ads.

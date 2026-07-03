@@ -6,7 +6,7 @@
 |---|---|---|---|
 | READY | `NEXT` | next pour amount/instruction | start next pour |
 | POURING | `POUR` | `POUR TO`, cumulative target, current addition | `注ぎ終えた` |
-| WAITING | `WAIT` | next-pour countdown and elapsed | `待機をスキップ` |
+| WAITING | `WAIT` | next-pour countdown and elapsed | `待機をスキップ` with confirmation |
 | READY_FOR_NEXT | `NEXT` | next step ready | start next pour |
 | DRAWDOWN | `DRAWDOWN` | wait until drawdown | `落ちきったら完了` |
 | FINISH | `DONE` | completion summary | continue to Finish |
@@ -45,7 +45,13 @@ Non-pour steps must omit the water amount rather than show 0/null.
 
 - before meaningful progress, Back may return to Preview
 - after progress, Back requires a confirmation dialog
-- background recovery restores exact state/snapshot
+- Pause continuity preserves the same underlying state and step within the same live session
+- same-process background continuity may preserve the in-memory session and recalculate elapsed from in-memory timestamps
+- reload/crash/process termination does not restore an incomplete brew
+- incomplete brew does not create a History record
+- completed History snapshots are separate from incomplete-brew recovery
+- WAITING skip requires explicit confirmation and logs a skip event
+- normal mode does not gain permanent manual next/back controls from the WAITING skip decision
 - repeated taps must not create duplicate transitions
 
 ## Accessibility
