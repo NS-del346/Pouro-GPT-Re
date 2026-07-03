@@ -9,14 +9,15 @@ import { describe, expect, it } from 'vitest';
 const REPOSITORY_ROOT = dirname(dirname(dirname(dirname(fileURLToPath(import.meta.url)))));
 const SOURCE_ROOT = join(REPOSITORY_ROOT, 'src');
 
-const CANONICAL_R13_SEQUENCE = [50, 70, 60, 60, 60] as const;
+const CANONICAL_R13_SEQUENCE = [50, 70, 30, 90, 60] as const;
 
 // OBSOLETE / NEGATIVE_REGRESSION_FIXTURE: must never appear in production source.
-const OBSOLETE_R13_SEQUENCE_NEGATIVE_REGRESSION_FIXTURE = [50, 70, 30, 90, 60] as const;
+const OBSOLETE_R13_SEQUENCE_NEGATIVE_REGRESSION_FIXTURE = [50, 70, 60, 60, 60] as const;
 
 const PRODUCTION_SOURCE_EXTENSION = /\.(?:ts|tsx)$/;
 const TEST_SOURCE_EXTENSION = /\.test\.(?:ts|tsx)$/;
 const NUMBER_UNIT_PATTERN = String.raw`(?:\s*(?:g|grams?))?`;
+const R13_CONTEXT_PATTERN = /\b(?:r-?13|winton|drawdown\s*five)\b/i;
 
 function walkProductionSourceFiles(directory: string): string[] {
   if (!existsSync(directory)) {
@@ -69,6 +70,14 @@ function commaSeparatedTextSequencePattern(sequence: readonly number[]): RegExp 
   return sequencePattern(sequence, String.raw`\s*,\s*`);
 }
 
+function isR13ScopedOccurrence(source: string, matchIndex: number): boolean {
+  const contextStart = Math.max(0, matchIndex - 300);
+  const contextEnd = Math.min(source.length, matchIndex + 300);
+  const context = source.slice(contextStart, contextEnd);
+
+  return R13_CONTEXT_PATTERN.test(context);
+}
+
 function findObsoleteSequenceViolations(): string[] {
   const patterns = [
     arraySequencePattern(OBSOLETE_R13_SEQUENCE_NEGATIVE_REGRESSION_FIXTURE),
@@ -82,7 +91,11 @@ function findObsoleteSequenceViolations(): string[] {
     }
 
     const source = readFileSync(filePath, 'utf8');
-    const matched = patterns.some((pattern) => pattern.test(source));
+    const matched = patterns.some((pattern) => {
+      const match = pattern.exec(source);
+
+      return match ? isR13ScopedOccurrence(source, match.index) : false;
+    });
 
     return matched ? [relative(REPOSITORY_ROOT, filePath).replaceAll('\\', '/')] : [];
   });
@@ -95,5 +108,11 @@ describe('R-13 obsolete sequence regression guard', () => {
 
   it('does not allow the obsolete R-13 sequence in production source', () => {
     expect(findObsoleteSequenceViolations()).toEqual([]);
+  });
+
+  it('does not treat the same sequence as obsolete outside R-13 context', () => {
+    const fourSixContext = 'four-six sweeter stronger generated sequence: 50 / 70 / 60 / 60 / 60 g';
+
+    expect(isR13ScopedOccurrence(fourSixContext, fourSixContext.indexOf('50'))).toBe(false);
   });
 });
