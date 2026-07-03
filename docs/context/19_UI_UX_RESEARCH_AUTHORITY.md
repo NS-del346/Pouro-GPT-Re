@@ -1,6 +1,6 @@
 # UI/UX Research Authority
 
-Status: `OWNER_APPROVED_CURRENT_CANONICAL_RESEARCH_INPUT`  
+Status: `OWNER_APPROVED_CURRENT_CANONICAL_RESEARCH_INPUT`
 Effective date: `2026-07-03`
 
 ## Current canonical package

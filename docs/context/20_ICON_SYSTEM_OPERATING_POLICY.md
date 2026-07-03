@@ -1,6 +1,6 @@
 # Icon System Operating Policy
 
-Status: `OWNER_APPROVED_DIRECTION`  
+Status: `OWNER_APPROVED_DIRECTION`
 Effective date: `2026-07-03`
 
 ## Source and family
@@ -9,7 +9,7 @@ Effective date: `2026-07-03`
 icon_system:
   import_tool:
     name: Iconify
-    figma_community_plugin_id: "735098390272716381"
+    figma_community_plugin_id: '735098390272716381'
     role: search_and_editable_vector_import
   default_family:
     name: Iconoir

@@ -1,6 +1,6 @@
 # Gate 1 Three-Track Refinement Plan
 
-Status: `READY_AFTER_CURRENT_GATE1_AUTHORITY_REPAIR`  
+Status: `READY_AFTER_CURRENT_GATE1_AUTHORITY_REPAIR`
 Research input: `POURO_GPT_RE_UIUX_RESEARCH_FINAL_PACKAGE_20260703.zip`
 
 ## Boundary
@@ -36,15 +36,15 @@ Before new high-fidelity refinement:
 
 The following remain `OPEN` or `OWNER_DECISION_REQUIRED` and are not implementation authority:
 
-| ID | Scope | Decision |
-|---|---|---|
-| OD-01 | AB02 | Primary value: water, elapsed time, or context-dependent hierarchy |
-| OD-02 | AB04 | Route-rail density and whole-route visibility |
-| OD-03 | Fable5 | Secondary English usage |
-| OD-04 | Shared | WAITING skip availability and deviation logging |
-| OD-05 | Shared | Resumable snapshot versus terminal partial record |
-| OD-06 | Shared | Drawdown confirmation to Finish transition |
-| OD-07 | Shared | Frequency of non-auto-advance explanation |
+| ID    | Scope  | Decision                                                           |
+| ----- | ------ | ------------------------------------------------------------------ |
+| OD-01 | AB02   | Primary value: water, elapsed time, or context-dependent hierarchy |
+| OD-02 | AB04   | Route-rail density and whole-route visibility                      |
+| OD-03 | Fable5 | Secondary English usage                                            |
+| OD-04 | Shared | WAITING skip availability and deviation logging                    |
+| OD-05 | Shared | Resumable snapshot versus terminal partial record                  |
+| OD-06 | Shared | Drawdown confirmation to Finish transition                         |
+| OD-07 | Shared | Frequency of non-auto-advance explanation                          |
 
 Monetization interruption during Active Brew is already resolved by higher Owner authority and is not reopened here.
 

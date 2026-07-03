@@ -1,7 +1,7 @@
 # Pourō-GPT Re Context Index
 
 Status: canonical context-pack index  
-Generated: 2026-07-03  
+Generated: 2026-07-03
 Admin model policy: GPT-5.5 高
 
 ## 1. Authority Order

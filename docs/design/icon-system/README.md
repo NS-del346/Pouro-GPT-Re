@@ -1,6 +1,6 @@
 # Pourō Icon System
 
-Status: `WORKING_SYSTEM_REGISTERED`  
+Status: `WORKING_SYSTEM_REGISTERED`
 Canonical operating policy: `../../context/20_ICON_SYSTEM_OPERATING_POLICY.md`
 
 ## Current direction
