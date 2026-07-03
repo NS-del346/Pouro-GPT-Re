@@ -44,11 +44,21 @@ Convert the canonical UI/UX correction into small, testable implementation slice
 ### WP-06 Active Brew State Model
 
 - explicit reducer/state machine
+- PR #7 merged the BrewState/event vocabulary and authority invariant foundation only
+- future reducer implementation
+- future timer/countdown implementation
+- future state transition implementation
+- future Active Brew UI implementation
 - user-confirmed pour completion
 - Waiting/Pause separation
 - Drawdown
-- background/crash recovery
-- event log and snapshots
+- same-session Pause continuity
+- same-process background continuity
+- no incomplete brew persistence
+- no reload/crash restoration
+- no resumable session after reload
+- completed History snapshots remain separate from incomplete-brew recovery
+- event log foundation without claiming completed runtime behavior
 
 This package is a release blocker and should not be reduced to visual polish.
 
