@@ -96,8 +96,10 @@ It should support:
 - actual temperature
 - actual drawdown time
 - planned vs actual differences
-- background recovery
-- session snapshot
+- same-process background continuity without reload/crash/process restoration
+- completed History snapshots only; no persistent incomplete-brew recovery snapshot
+
+This supports in-memory elapsed recalculation during the same process, but does not authorize restoring incomplete brews after reload, crash, browser/app process termination, or saving incomplete brews to History.
 
 ### 5. LAB Compare
 
