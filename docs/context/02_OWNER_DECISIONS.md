@@ -46,13 +46,34 @@ Each AI must state the model used and create a concise Capability Inventory befo
 
 ## 4. Recipe and Data Decisions
 
+- Owner Decision 2026-07-03: current final/latest Recipe Truth for Pourō-GPT Re is the Owner-provided Pourō-Figma extraction package `POURO_FIGMA_LATEST_FINAL_RECIPE_TRUTH_HG001.zip`.
+  - Source project: `NS-del346/Pouro-Figma`.
+  - Source integration head: `a69775bbbda15d98ffa5aa747de5e37e86efc630`.
+  - Package SHA-256: `dd1fd736652669952214995cd003e347401013f2dc6584da945e0201020d178f`.
+  - Extraction timestamp: `2026-07-02T23:29:36+00:00`.
+  - `external_research_performed=false`.
+  - `automatic_implementation_authorized=false`.
+  - Values not stored in the package remain unresolved and must not be inferred, regenerated, or filled from external web sources.
+  - If Owner-supplied values differ from general public materials, do not auto-correct to the public value.
+  - Planned recipes in the package are Owner project input, not runtime implementation approval.
 - Recipe Truth overrides generic UX convenience.
 - 4:6 remains one method with taste × strength selections.
+- 4:6 is a two-axis generated method; R-01, R-02, and R-03 must not be split into independent Home methods.
 - Original 4:6 terminology must not be casually rewritten.
-- R-13 correct sequence is `50 / 70 / 60 / 60 / 60 g`.
-- R-13 old sequence `50 / 70 / 30 / 90 / 60 g` is prohibited except when identifying it as an obsolete value.
+- R-13 current canonical sequence is `50 / 70 / 30 / 90 / 60 g`.
+- R-13 obsolete sequence `50 / 70 / 60 / 60 / 60 g` is prohibited except when identifying it as an obsolete value.
+- R-13 remains event-confirmed: do not advance from elapsed time alone, check previous-pour drawdown condition, require user confirmation, treat target times as guidance, and prohibit silent completion.
+- New Hybrid current pours are `40 / 80 / 80 / 100 g` with workflow cues `0 / 40 / 80 / 120 / 160 / 200 seconds`.
+- New Hybrid obsolete values `64 / 64 / 172 g` and `0 / 40 / 90 / 130 / 165 / 210 seconds` must not be used as migration authority.
+- Ice Brew ratio applies to beverage-water-equivalent mass, not hot water alone; reference is dose `20 g`, hot water `150 g`, ice `80 g`, beverage-water-equivalent `230 g`, ratio `1:11.5`.
+- Active Brew cumulative grams for Ice Brew show hot water only, and the final non-pour action must not display `0 g`.
+- Brew ratio input range `10.0` to `20.0` in `0.5` steps is `UX_GUARDRAIL_NOT_RECIPE_TRUTH` and must not override built-in reference dose, water, or step values.
+- R-11 through R-14 are Owner project inputs until runtime implementation is separately approved; missing primary-source registrations remain explicit and must not be filled from public materials.
+- R-04, R-05, R-06, and R-07 remain excluded from runtime: R-04/R-05/R-06 are unconfirmed placeholders and R-07 is unverified.
 - R-14 original bloom amount remains unresolved; current display may identify 30 g as a home-reproduction value.
 - Source metadata is mandatory; URLs must not be invented.
+- Verbose package evidence values such as `OWNER_DECISION_AND_CURRENT_CANONICAL`, `PRODUCT_OWNER_SUPPLIED_NOTES`, `OWNER_CONFIRMED`, and `OWNER_CONFIRMED_AS_PROJECT_INPUT_PRIMARY_RECIPE_SOURCE_NOT_REGISTERED_FOR_COMPLETE_PARAMETERS` are provenance evidence only; runtime source metadata enum mapping is a future decision.
+- Pourō-Figma legacy fixed modules `src/app/data/ft03RecipeTruth.ts` and `src/app/recipeBinding.ts` are not migration authority for Pourō-GPT Re.
 - History, My Recipe, LAB Compare v1, JSON export, and JSON import remain free.
 - User data must never be held hostage.
 

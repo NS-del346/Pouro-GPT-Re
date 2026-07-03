@@ -1,8 +1,31 @@
 # Recipe Truth v1
 
-Status: owner-provided working canon, integrated 2026-06-30; rounding clarification patched in v1.1 and reference-ratio clarification patched in v1.1.1 on 2026-07-01.
+Status: owner-provided working canon, integrated 2026-06-30; rounding clarification patched in v1.1 and reference-ratio clarification patched in v1.1.1 on 2026-07-01; authority rebound on 2026-07-03 to Owner-provided Pourō-Figma extraction package `POURO_FIGMA_LATEST_FINAL_RECIPE_TRUTH_HG001.zip`.
 
 This document is the highest-authority recipe specification after Owner Decisions. Implementation must not silently simplify, reinterpret, or regenerate historical snapshots from newer rules.
+
+## 0. Authority Provenance
+
+Current explicit Owner Decision date: 2026-07-03.
+
+```yaml
+authority_package:
+  source_project: NS-del346/Pouro-Figma
+  source_integration_head: a69775bbbda15d98ffa5aa747de5e37e86efc630
+  package_filename: POURO_FIGMA_LATEST_FINAL_RECIPE_TRUTH_HG001.zip
+  package_sha256: dd1fd736652669952214995cd003e347401013f2dc6584da945e0201020d178f
+  extraction_timestamp: 2026-07-02T23:29:36+00:00
+  external_research_performed: false
+  automatic_implementation_authorized: false
+```
+
+- The current final/latest Recipe Truth is the Owner-provided Pourō-Figma extraction package above.
+- External web research is not required for Recipe values.
+- Primary materials will be supplied by the Owner when needed.
+- Values not stored in the package remain unresolved and must not be inferred or completed.
+- If Owner-supplied values differ from general public materials, do not auto-correct to the public value.
+- Planned recipes in the package are Owner project input, not runtime implementation approval.
+- Product-facing UI must not imply official affiliation, endorsement, supervision, or complete reproduction.
 
 ## 1. Global Rules
 
@@ -24,6 +47,13 @@ Additional methods:
 
 4:6 is one method with a taste × strength matrix. R-01, R-02, and R-03 are not independent Home cards.
 
+Excluded from runtime until explicit Owner revision:
+
+- R-04: unconfirmed placeholder
+- R-05: unconfirmed placeholder
+- R-06: unconfirmed placeholder
+- R-07: unverified
+
 ### 1.2 Input and Scaling
 
 ```yaml
@@ -35,6 +65,7 @@ brew_ratio:
   minimum: 10.0
   maximum: 20.0
   step: 0.5
+  classification: UX_GUARDRAIL_NOT_RECIPE_TRUTH
 output_precision:
   grams: 0.1g
 ```
@@ -49,6 +80,7 @@ output_precision:
 - 最終注湯後の合計は、必ず計算済み総湯量と一致させる。
 
 - Provide steppers and direct numeric input.
+- The `10.0` to `20.0` ratio range and `0.5` step are UX guardrails, not Recipe Truth; they must not override built-in reference dose, water, or listed step values.
 - Total water = coffee dose × ratio.
 - Internal calculation should avoid floating-point drift; a 0.1 g integer representation is preferred.
 - Distribute rounding error to the final **pour** so the sum of all pour amounts equals total water.
@@ -99,6 +131,8 @@ type SourceConfidence =
 ```
 
 Store person, competition, brand, source URL, and unresolved points in detail metadata. Home cards use neutral technique-oriented names.
+
+Package evidence contains verbose source metadata strings such as `OWNER_DECISION_AND_CURRENT_CANONICAL`, `PRODUCT_OWNER_SUPPLIED_NOTES`, `OWNER_CONFIRMED`, and `OWNER_CONFIRMED_AS_PROJECT_INPUT_PRIMARY_RECIPE_SOURCE_NOT_REGISTERED_FOR_COMPLETE_PARAMETERS`. These are extraction/provenance evidence, not runtime enum literals. Mapping those values to the current generic runtime types remains a future source metadata decision.
 
 ### 1.4 Timing Semantics
 
@@ -211,6 +245,8 @@ At 20 g / 300 g:
 | より明るく | より濃く | 70 / 50 / 90 / 90 g |
 | より明るく | さらに濃く | 70 / 50 / 60 / 60 / 60 g |
 
+The `50 / 70 / 60 / 60 / 60 g` sequence appears in this table only as the 4:6 `より甘く` × `さらに濃く` generated combination. It is not the R-13 Drawdown Five canonical sequence and must not be used as R-13 migration authority.
+
 Each pour begins at 45-second intervals. `3:30` is drawdown guidance, not a guaranteed finish time or progress denominator.
 
 ---
@@ -239,6 +275,13 @@ roast: unresolved
 | 3:20 | OPEN | — | 300 g | 落ち切り・完成 |
 
 Cooling water added to the kettle is not included in total water, ratio, pour amount, cumulative water, or history water. Its amount is unmeasured; show only the instruction.
+
+Obsolete New Hybrid values:
+
+- Pours: `64 / 64 / 172 g`
+- Workflow cues: `0 / 40 / 90 / 130 / 165 / 210 seconds`
+
+Do not use obsolete New Hybrid values or Pourō-Figma legacy fixed modules as migration authority.
 
 ---
 
@@ -287,7 +330,7 @@ grind: unresolved
 final_action: 3:00
 ```
 
-`HOT : ICE = 150 : 80`. The ratio applies to beverage-water equivalent, not hot water alone.
+`HOT : ICE = 150 : 80`. The ratio applies to beverage-water equivalent (`20 g` dose, `150 g` hot water, `80 g` ice, `230 g` beverage-water-equivalent, `1:11.5`), not hot water alone.
 
 | Time | Action | Amount | HOT cumulative |
 |---|---|---:|---:|
@@ -299,9 +342,18 @@ final_action: 3:00
 | 2:00 | HOT 5投目 | 30 g | 150 g |
 | 3:00 | スワール・急冷 | — | 150 g |
 
-Active Brew cumulative display shows hot water only. The final action must not display 0 g.
+Active Brew cumulative display shows hot water only. The final non-pour action must not display `0 g`.
 
 ---
+
+## Planned Recipe Boundary
+
+R-11 through R-14 are Owner project input from the authority package. They are not runtime implementation approval.
+
+- Missing primary-source registrations remain explicit.
+- Do not complete missing values from public materials or external web research.
+- Product-facing UI must not imply official affiliation, endorsement, supervision, or complete reproduction.
+- Update these entries only when the Owner provides additional materials or an explicit implementation approval.
 
 ## 6. Collective 15.6
 
@@ -438,15 +490,15 @@ finish_guidance: approximately 2:40
 
 Comandante Red Clix 62 clicks is a home reference.
 
-**Canonical sequence:** `50 / 70 / 60 / 60 / 60 g`  
-**Prohibited obsolete sequence:** `50 / 70 / 30 / 90 / 60 g`
+**Canonical sequence:** `50 / 70 / 30 / 90 / 60 g`
+**Prohibited obsolete sequence:** `50 / 70 / 60 / 60 / 60 g`
 
 | Target time | Start condition | Temperature | Pour | Cumulative |
 |---|---|---:|---:|---:|
 | 0:00 | start | 93°C | 50 g | 50 g |
 | about 0:35 | after previous pour nearly drains | 93°C | 70 g | 120 g |
-| about 1:05 | after previous pour nearly drains | 93°C | 60 g | 180 g |
-| about 1:35 | after previous pour nearly drains | 88°C | 60 g | 240 g |
+| about 1:05 | after previous pour nearly drains | 93°C | 30 g | 150 g |
+| about 1:35 | after previous pour nearly drains | 88°C | 90 g | 240 g |
 | about 2:05 | after previous pour nearly drains | 88°C | 60 g | 300 g |
 | about 2:40 | final drawdown | — | — | 300 g |
 
@@ -454,8 +506,10 @@ Active Brew rules:
 
 - Keep measuring elapsed time.
 - Do not auto-advance from time alone.
-- User confirms drawdown before advancing.
+- Check the previous-pour drawdown condition before the next pour.
+- Require user confirmation before advancing.
 - Target times are guidance.
+- Silent completion is prohibited.
 - Do not add manual agitation or swirl.
 - Pouring itself is the agitation.
 - A one-kettle home alternative may suggest opening the lid to cool naturally.
@@ -465,7 +519,7 @@ Scaling cumulative targets:
 ```text
 c1 = round0_1g(total × 1/6)
 c2 = round0_1g(total × 2/5)
-c3 = round0_1g(total × 3/5)
+c3 = round0_1g(total × 1/2)
 c4 = round0_1g(total × 4/5)
 c5 = total
 ```
@@ -563,7 +617,7 @@ Rules:
 
 ## 11. Release-blocking Recipe Items
 
-- R-13 obsolete values must not exist in runtime data or tests.
+- R-13 obsolete sequence `50 / 70 / 60 / 60 / 60 g` must not exist as R-13 runtime data, normal fixtures, or UI display. The same numeric sequence remains valid only when clearly scoped to the 4:6 `より甘く` × `さらに濃く` generated combination or to an explicit R-13 obsolete-value guard.
 - R-14 30 g / 40 g bloom source conflict remains unresolved and must be visibly labeled.
-- R-11 through R-14 require source metadata in code.
+- R-11 through R-14 require source metadata in code before runtime implementation.
 - Unverified roast, temperature, filter, and attribution fields remain unresolved rather than being guessed.

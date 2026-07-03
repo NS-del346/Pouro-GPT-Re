@@ -98,14 +98,17 @@ Active Brew は release blocker として扱う。詳細正本は `docs/context/
 
 ## 9. Recipe Truth
 Recipe Truth の正本は `docs/context/03_RECIPE_TRUTH_V1.md`。
+- 現況最終・最新のRecipe Truthは、Owner提供package `POURO_FIGMA_LATEST_FINAL_RECIPE_TRUTH_HG001.zip`（Pourō-Figma integration head `a69775bbbda15d98ffa5aa747de5e37e86efc630`）を正とする。
+- Recipe値の外部Web調査は不要。保存されていない値、unresolved values、一次資料未登録値を推測・補完しない。
 - コード都合でRecipe Truthを変更しない。
 - 4:6は taste × strength を持つ1メソッドとして扱う。
 - `round0_1g()`、0.1g丸め、最終注湯への丸め差分吸収を維持する。
 - 内蔵基準レシピは `reference_water` と表のstep値を正とし、表示ratioで再計算しない。
-- R-13正値は `50 / 70 / 60 / 60 / 60 g`。
-- R-13旧値 `50 / 70 / 30 / 90 / 60 g` はproduction data、通常fixture、UI表示へ混入させない。
+- R-13正値は `50 / 70 / 30 / 90 / 60 g`。
+- R-13旧値 `50 / 70 / 60 / 60 / 60 g` はR-13 production data、通常fixture、UI表示へ混入させない。
 - R-14 bloomは unresolved。30gは家庭再現値として扱い、競技一次値と混同しない。
 - source metadataを捏造しない。URLを作らない。
+- Pourō-Figma package内のlegacy fixed module（`src/app/data/ft03RecipeTruth.ts`、`src/app/recipeBinding.ts`）はmigration authorityとして使用しない。
 
 ## 10. No Hostage Data / Privacy
 正本は `docs/context/10_DATA_STORAGE_PRIVACY.md` と `docs/context/16_NO_HOSTAGE_DATA_POLICY.md`。
