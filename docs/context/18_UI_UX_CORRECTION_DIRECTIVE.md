@@ -96,12 +96,14 @@ Consequences:
 
 ## 4. Active Brew State Model
 
-The prior behavior in which a pour automatically becomes waiting based only on elapsed time is prohibited.
+Gate 5A makes Active Brew semantics mode-specific. The prior behavior in which a user-confirmed pour automatically becomes waiting based only on elapsed time remains prohibited for LAB and event-capture flows. BREW uses app-scheduled recipe guidance and must not claim actual physical pour completion.
 
 ```yaml
 active_brew:
   previous_problem: pour_completion_was_inferred_from_time_only
-  corrected_policy: pour_completion_is_confirmed_by_user_action
+  corrected_policy:
+    BREW: app_scheduled_recipe_timeline_without_actual_event_claim
+    LAB: pour_completion_is_confirmed_by_user_action
   states:
     - READY
     - POURING
@@ -118,12 +120,13 @@ active_brew:
 ### Required Semantics
 
 - `READY`: The next action is prepared but has not begun.
-- `POURING`: The user is actively pouring. Time may continue, but elapsed time alone must not complete the pour.
-- The user explicitly selects an action equivalent to **注ぎ終えた** to leave `POURING`.
-- `WAITING`: A recipe-directed wait/rest period after a confirmed pour.
-- `READY_FOR_NEXT`: The next step may begin.
-- `DRAWDOWN`: A separate, explicitly explained state for final or between-pour drawdown behavior.
-- `FINISH`: The brew has ended and may be evaluated/saved.
+- `POURING`: In BREW this is a planned guidance state; in LAB this is a user-confirmed active pour event.
+- BREW must never imply that elapsed time proves a real pour was completed.
+- LAB requires an action equivalent to **注ぎ終えた** to leave `POURING`.
+- `WAITING`: A recipe-directed wait/rest period. In LAB, app elapsed time may only advance to `READY_FOR_NEXT`; it must not start the next pour.
+- `READY_FOR_NEXT`: The next step may begin after the correct mode-specific authority allows it.
+- `DRAWDOWN`: A separate, explicitly explained state. In LAB it completes only by user confirmation.
+- `FINISH`: The brew has ended and may be evaluated/saved with the correct completion status.
 - Pause is an overlay/control state, not an alias for Waiting.
 - Resume returns to the exact state and step that was paused.
 - Event-confirmed recipes such as Drawdown Five must not auto-advance from target times alone.
@@ -132,8 +135,9 @@ This is a Brew Runner specification correction and a release blocker, not cosmet
 
 ```yaml
 critical_release_blocker:
-  no_time_only_pouring_to_waiting: true
-  user_confirms_pour_done: true
+  BREW_no_actual_event_claim_from_schedule: true
+  LAB_no_time_only_pouring_to_waiting: true
+  LAB_user_confirms_pour_done: true
   pause_is_not_waiting: true
   drawdown_is_independent: true
   event_confirmed_recipe_does_not_advance_from_target_time_only: true
@@ -274,6 +278,8 @@ Rules:
 
 ## 12. Implementation Order
 
+The UI/UX slice order below is subordinate to the Gate 5A implementation roadmap. PR-04A re-scopes Draft PR #10 to LAB transition-reducer foundation only. PR-04B owns the complete LAB event engine, including append-only event log, Undo, Skip, Correction, and Interruption. PR-07 and PR-08 must not start before PR-04B and storage prerequisites are satisfied.
+
 ```text
 01 Motion Foundation
 02 Iconoir Common Icons
@@ -293,7 +299,8 @@ Implementation must preserve Recipe Truth, source metadata, local-first data saf
 
 The following are FAIL/release-blocking unless explicitly resolved:
 
-- a pour completes or moves to Waiting from elapsed time alone
+- BREW scheduled cues imply actual pour completion or sensing
+- LAB pour completes or moves to Waiting from elapsed time alone
 - Pause is represented as Waiting
 - Drawdown is only an unexplained running timer
 - a five-pour method appears to contain only three pours without explanation

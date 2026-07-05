@@ -86,13 +86,19 @@ unrestricted / full access への変更をCodexから自動提案しない。必
 
 ## 8. Active Brew Release Blocker
 Active Brew は release blocker として扱う。詳細正本は `docs/context/17_BREW_RUNNER_RELIABILITY.md` と `docs/context/18_UI_UX_CORRECTION_DIRECTIVE.md`。
+Gate 5A canonicalization以降、共有state名は維持するがtransition authorityはmode-specificとする。
+- BREW: `APP_SCHEDULED` absolute Recipe Timeline。app cueは予定進行であり、実際の注湯開始／完了を検知・記録したとは扱わない。
+- LAB: `USER_CONFIRMED` event capture。注湯開始、注湯完了、drawdown完了、Undo、Skip、Correction、InterruptionはLAB event-engineで扱う。
+- PR #10はDraftのまま保持し、PR-04AでLAB transition-reducer foundationへre-scopeする。PR-04Bがappend-only event log、Undo、Skip、Correction、Interruptionを担当する。
+- completion statusは `SCHEDULE_COMPLETE`、`MANUAL_END_COMPLETE`、`EARLY_END_SAVED`、`USER_CONFIRMED_COMPLETE`、`LAB_INCOMPLETE_SAVED` を使い分ける。
+- PR-00はdocs-only canonicalizationであり、runtime実装、Recipe Truth、Figma、PR #10 branch変更を許可しない。
 必ず守ること。
-- `POURING` から `WAITING` へ経過時間だけで自動遷移させない。
-- 注湯完了は `注ぎ終えた` などユーザー明示操作で確定する。
+- LABまたはevent-confirmed flowでは、`POURING` から `WAITING` へ経過時間だけで自動遷移させない。
+- LABの注湯完了は `注ぎ終えた` などユーザー明示操作で確定する。
 - Pause は Waiting ではなく overlay/control state。
 - Resume は停止前と同じ underlying state と step に戻す。
-- Drawdown は独立状態として扱い、ユーザー確認なしに完了しない。
-- event-confirmed recipe は target time だけで進行させない。
+- Drawdown は独立状態として扱う。LABのDrawdownはユーザー確認なしに完了しない。
+- event-confirmed recipe とLAB eventは target time だけで進行させない。
 - 非注湯stepに `0 g`、`null g`、捏造量を表示しない。
 - recoveryで負の時間、重複遷移、silent completeを作らない。
 

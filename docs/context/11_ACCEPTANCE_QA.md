@@ -14,6 +14,30 @@ npm run test:e2e:offline
 
 If a command does not exist or cannot be executed, record it as `NOT_RUN` with the reason. Do not substitute assumptions.
 
+## Gate 5A Acceptance Baseline
+
+The Gate 5A planning package Revision 2 is the canonical PR dependency and QA traceability source for implementation planning. It does not authorize implementation by itself.
+
+P0 semantic checks:
+
+- BREW Active has no actual-event completion control and does not claim actual pour sensing.
+- BREW cue/notification state is derived from `APP_SCHEDULED` absolute Recipe Timeline semantics.
+- LAB Active requires explicit user-confirmed start, pour completion, next-pour, drawdown, Skip, Undo, Correction, and Interruption semantics as assigned by PR-04B.
+- PR-04A covers only the Draft PR #10 LAB transition-reducer foundation.
+- PR-04B covers append-only LAB event log, event identity/provenance, Undo, Skip/deviation retention, Correction lineage, Interruption intervals, physical elapsed-time continuity, duplicate-event guards, and invalid ordering tests.
+- PR-07 LAB Setup/Active Brew requires PR-04B and PR-05 completion.
+- PR-08 LAB Evaluation/LAB LOG requires PR-04B, PR-05, and PR-07 completion.
+- Beverage Mass and TDS are user-entered external measurements; Pourō does not sense them.
+- Recipe Truth never changes as a side effect of Recipe Version, My Recipe, LAB evaluation, or implementation convenience.
+
+Required completion-status coverage:
+
+- `SCHEDULE_COMPLETE`
+- `MANUAL_END_COMPLETE`
+- `EARLY_END_SAVED`
+- `USER_CONFIRMED_COMPLETE`
+- `LAB_INCOMPLETE_SAVED`
+
 ## Owner-Approved Recovery Scope
 
 OD-05 and OD-05-RECOVERY supersede any prior interpretation that incomplete-brew
@@ -66,11 +90,12 @@ Also verify:
 
 The following are blockers:
 
-- `POURING` changes to `WAITING` from time alone
-- `注ぎ終えた` is unavailable or ambiguous
+- BREW claims a scheduled cue is an actual pour-start, pour-complete, drawdown-complete, scale capture, or TDS sensing event
+- LAB `POURING` changes to `WAITING` from time alone
+- LAB `注ぎ終えた` is unavailable or ambiguous
 - Pause is treated as Waiting
 - Resume does not restore the same state
-- Drawdown is missing or automatically completes without the defined user confirmation
+- LAB Drawdown is missing or automatically completes without the defined user confirmation
 - elapsed and remaining information are misleading
 - same-process background return creates negative time or duplicate transitions
 - reload/crash/process termination restores an incomplete brew
