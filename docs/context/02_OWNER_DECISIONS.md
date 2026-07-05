@@ -80,7 +80,7 @@ Each AI must state the model used and create a concise Capability Inventory befo
 ## 5. UI/UX Decisions
 
 - `18_UI_UX_CORRECTION_DIRECTIVE.md` is canonical below higher-authority policies.
-- Active Brew must not move from `POURING` to `WAITING` based only on elapsed time.
+- LAB and event-confirmed Active Brew flows must not move from `POURING` to `WAITING` based only on elapsed time.
 - User action `注ぎ終えた` confirms pour completion.
 - Pause freezes and resumes the same state; Pause is not Waiting.
 - Drawdown is an independent state.
@@ -205,7 +205,7 @@ OD-07:
     - persisted preference schema
 ```
 
-Preserved principles:
+Preserved principles for LAB and event-confirmed flows:
 
 - POURINGは時間だけで完了しない。
 - 注ぎ終えた操作が必要。
@@ -214,6 +214,60 @@ Preserved principles:
 - Drawdownは独立状態。
 - Drawdownはユーザー確認なしに完了しない。
 - Recipe Truthを変更しない。
+
+### 5.2 Gate 4A Revision 2 / Gate 5A Canonicalization
+
+Status: `OWNER_APPROVED_FOR_PLANNING`; repository mutation is limited to PR-00 docs-only canonicalization until a later Owner implementation gate.
+
+```yaml
+Gate_4A_Revision_2:
+  artifact: POURO_THE_INSTRUMENT_GATE4A_CORRECTED_REVIEW_CANDIDATE_REV2_20260705.zip
+  sha256: DC2C87FDEF4C72857D56A536C3A6311DE4CB670FBF619F3E64361DEC2C22209E
+  independent_verdict: PASS_TO_IMPLEMENTATION_PLANNING
+
+Gate_5A_Implementation_Planning:
+  artifact: POURO_GATE5A_FINAL_IMPLEMENTATION_PLANNING_PACKAGE_REV2_20260705.zip
+  sha256: F4F090BDADCD14B3731A20D13ED3A178FCE53FF0222219FA079F23437F803177
+  independent_verdict: PASS_TO_IMPLEMENTATION_AUTHORIZATION
+  owner_decision: POURO-OWNER-GATE-5A-IMPLEMENTATION-PLANNING-AND-PR10-DISPOSITION-DECISION-001
+
+Gate_5B_PR00:
+  decision_id: POURO-OWNER-GATE-5B-PR00-DOCS-ONLY-CANONICALIZATION-AUTHORIZATION-001
+  implementation_authority: PR_00_ONLY
+  branch: docs/gate-1-5a-canonicalization
+  fixed_base_sha: 706ef059a0918bb5ca2f70b5b17ee0b161cc3cee
+```
+
+Canonical mode split:
+
+- BREW uses `APP_SCHEDULED` absolute Recipe Timeline progression.
+- LAB uses `USER_CONFIRMED` event capture.
+- `READY`, `POURING`, `WAITING`, `READY_FOR_NEXT`, `DRAWDOWN`, and `FINISH` may be shared display vocabulary, but transition authority is mode-specific.
+- BREW app-scheduled cues must not claim physical pour-start, pour-complete, drawdown-complete, scale capture, TDS sensing, or other actual-event detection.
+- LAB actual events are explicit user-confirmed or user-entered records.
+
+Canonical completion statuses:
+
+- `SCHEDULE_COMPLETE`: BREW schedule terminal completion.
+- `MANUAL_END_COMPLETE`: no-terminal or manually ended BREW completion.
+- `EARLY_END_SAVED`: user saves an early-ended BREW result.
+- `USER_CONFIRMED_COMPLETE`: LAB result completed through explicit user event confirmation.
+- `LAB_INCOMPLETE_SAVED`: LAB interruption or incomplete result saved without completed comparison status.
+
+Canonical data boundary:
+
+- One immutable Brew Snapshot is created per `brew_run_id` when a run is validly completed or explicitly saved.
+- Journal, user tags, favorite state, LAB evaluation, hypotheses, measurement values, and comparison interpretation are editable layers linked to immutable snapshots.
+- Planned values and actual/user-entered values remain separate.
+- Beverage Mass and TDS are user-entered external measurement values; Pourō does not sense them.
+- Recipe Version and My Recipe are explicit user-created/adopted records and do not mutate built-in Recipe Truth.
+
+PR #10 disposition:
+
+- Current Draft PR #10 remains `HOLD_OPEN_DRAFT_UNCHANGED` until PR-00 lands and preflight passes.
+- PR #10 must not merge as a generic BREW reducer.
+- PR-04A re-scopes the existing Draft PR #10 to a LAB transition-reducer foundation only.
+- PR-04B owns the complete LAB event engine: append-only event log, event identity/provenance, WAITING auto-completion to `READY_FOR_NEXT`, explicit next-pour start, Skip with deviation retention, Undo-last-event, Correction lineage, Interruption intervals, and physical elapsed-time continuity.
 
 ## 6. Monetization Decisions
 

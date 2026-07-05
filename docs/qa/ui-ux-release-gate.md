@@ -42,6 +42,13 @@ allowed_status:
 | VoiceOver                          | Human Gate     | VoiceOver verification                                                                       | NOT_RUN                     | NOT_RUN              | Human Gate required                                          | Not automated here                                                        |
 | Dynamic Type                       | Human Gate     | Dynamic Type/text enlargement verification                                                   | NOT_RUN                     | NOT_RUN              | Human Gate required                                          | Not automated here                                                        |
 | Reduced Motion                     | Human Gate     | Reduced Motion verification                                                                  | NOT_RUN                     | NOT_RUN              | Human Gate required                                          | Not automated here                                                        |
+| Gate 4A Revision 2                 | Planning Gate  | Corrected The Instrument planning contract                                                   | OWNER_BOUND_NOT_IMPLEMENTED | NOT_RUN              | Independent verdict PASS_TO_IMPLEMENTATION_PLANNING          | Planning source only; runtime unchanged                                   |
+| Gate 5A Revision 2                 | Planning Gate  | Implementation plan and PR #10 disposition                                                   | OWNER_BOUND_NOT_IMPLEMENTED | NOT_RUN              | Independent verdict PASS_TO_IMPLEMENTATION_AUTHORIZATION     | Requires later Owner implementation gate                                  |
+| BREW scheduled engine              | Gate 5A        | `APP_SCHEDULED` absolute Recipe Timeline; no actual event claim                              | NOT_IMPLEMENTED             | NOT_RUN              | Planned PR-03                                                | Runtime behavior unchanged                                                |
+| PR-04A LAB reducer foundation      | Gate 5A        | Draft PR #10 re-scoped to LAB transition-reducer foundation only                             | NOT_IMPLEMENTED             | NOT_RUN              | Planned PR-04A                                               | PR #10 must remain Draft until authorized preflight                       |
+| PR-04B LAB event engine            | Gate 5A        | Append-only event log, Undo, Skip, Correction, Interruption                                  | NOT_IMPLEMENTED             | NOT_RUN              | Planned PR-04B                                               | Required before PR-07/PR-08                                               |
+| PR-07 LAB Setup / Active Brew UI   | Gate 5A        | LAB setup and active manual-event UI                                                         | NOT_IMPLEMENTED             | NOT_RUN              | Depends on PR-04B and PR-05                                  | Must not start before prerequisites                                       |
+| PR-08 LAB Evaluation / LAB LOG     | Gate 5A        | LAB evaluation, measurement, validity, correction display, cross-links                       | NOT_IMPLEMENTED             | NOT_RUN              | Depends on PR-04B, PR-05, and PR-07                          | Measurement values are user-entered external-tool values                  |
 
 ## Result Vocabulary
 
@@ -79,8 +86,9 @@ For 375×667, 393×852, 430×932:
 
 ## Gate D — Active Brew
 
-- no time-only Pouring completion
-- user `注ぎ終えた`
+- BREW scheduled cues do not claim actual pour-start/pour-complete or sensing
+- LAB has no time-only Pouring completion
+- LAB user `注ぎ終えた`
 - Waiting countdown
 - WAITING skip requires confirmation
 - WAITING skip event logged
@@ -90,7 +98,7 @@ For 375×667, 393×852, 430×932:
 - reload/crash/process termination does not restore incomplete brew
 - incomplete brew does not create History
 - incomplete brew is not silently completed
-- independent Drawdown
+- independent Drawdown with mode-specific completion authority
 - planned vs actual preserved
 
 ## Gate E — Accessibility

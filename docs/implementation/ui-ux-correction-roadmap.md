@@ -4,6 +4,35 @@
 
 Convert the canonical UI/UX correction into small, testable implementation slices while preserving Recipe Truth and data safety.
 
+## Gate 5A PR Dependency Overlay
+
+The work packages below are UI/UX grouping labels. Implementation PR order is governed by the Gate 5A Revision 2 roadmap:
+
+```text
+PR-00 Canonical authority
+  ↓
+PR-01 Mode/provenance/domain contracts
+  ↓
+PR-02 Clock and absolute timeline
+  ├─ PR-03 BREW scheduled engine
+  └─ PR-04A PR #10 LAB transition-reducer foundation
+         ↓
+      PR-04B LAB event-engine completion
+         ↓
+PR-05 Storage repositories/schema
+  ├─ PR-06 BREW Finish/Journal/BREW LOG
+  ├─ PR-07 LAB Setup/Active Brew
+  └─ PR-08 LAB Evaluation/LAB LOG
+         ↓
+PR-09 Notifications/Cues/Accessibility
+PR-10 Profiles/Tolerance
+PR-11 Recipe Version/My Recipe
+PR-12 Mode navigation/The Instrument visual integration
+PR-13 Integrated QA/Offline readiness
+```
+
+PR-04A is the existing Draft PR #10 re-scope to a LAB transition-reducer foundation only. PR-04B owns append-only event log, Undo, Skip, Correction, Interruption, event identity/provenance, and ordering guards. PR-07 and PR-08 must not proceed until PR-04B has landed or an equivalent Owner-approved LAB foundation exists.
+
 ## Work Packages
 
 ### WP-01 Motion Foundation
@@ -43,13 +72,13 @@ Convert the canonical UI/UX correction into small, testable implementation slice
 
 ### WP-06 Active Brew State Model
 
-- explicit reducer/state machine
+- mode-specific state model: BREW `APP_SCHEDULED`, LAB `USER_CONFIRMED`
 - PR #7 merged the BrewState/event vocabulary and authority invariant foundation only
-- future reducer implementation
-- future timer/countdown implementation
-- future state transition implementation
+- future BREW scheduled engine implementation in PR-03
+- future LAB transition-reducer foundation in PR-04A
+- future LAB event-engine completion in PR-04B
 - future Active Brew UI implementation
-- user-confirmed pour completion
+- user-confirmed LAB pour completion
 - Waiting/Pause separation
 - Drawdown
 - same-session Pause continuity
@@ -96,4 +125,4 @@ This package is a release blocker and should not be reduced to visual polish.
 
 ## PR Strategy
 
-Keep each PR close to one work package. Shared foundation PRs may precede screen PRs. Do not merge to main or deploy without owner approval.
+Keep each PR close to one work package. Shared foundation PRs may precede screen PRs, but the Gate 5A dependency overlay is binding. Do not merge to main, deploy, mark Ready, modify PR #10, or start later PRs without owner approval.
